@@ -18,7 +18,7 @@
                 // Dynamically load the specific content
                 const contentDiv = document.getElementById('content');
                 const urlParams = new URLSearchParams(window.location.search);
-                const page = urlParams.get('page') || 'home';
+                const page = urlParams.get('page') || 'standings';
                 fetch(`${page}.html`)
                     .then(response => response.text())
                     .then(contentData => {
