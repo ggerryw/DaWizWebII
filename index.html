@@ -1,0 +1,32 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DaWiz Web</title>
+</head>
+<body>
+    <div id="boilerplate-container"></div>
+    <script>
+        // Load the boilerplate
+        fetch('boilerplate.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('boilerplate-container').innerHTML = data;
+
+                // Dynamically load the specific content
+                const contentDiv = document.getElementById('content');
+                const urlParams = new URLSearchParams(window.location.search);
+                const page = urlParams.get('page') || 'home';
+                fetch(`${page}.html`)
+                    .then(response => response.text())
+                    .then(contentData => {
+                        contentDiv.innerHTML = contentData;
+                    })
+                    .catch(error => console.error('Error loading content:', error));
+            })
+            .catch(error => console.error('Error loading boilerplate:', error));
+    </script>
+</body>
+</html>
